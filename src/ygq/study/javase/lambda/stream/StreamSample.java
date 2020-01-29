@@ -1,4 +1,4 @@
-package ygq.study.javase.lambda;
+package ygq.study.javase.lambda.stream;
 
 import java.util.ArrayList;
 import java.util.List;
