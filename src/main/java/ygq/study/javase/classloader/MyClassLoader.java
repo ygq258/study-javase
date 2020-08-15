@@ -109,8 +109,8 @@ public class MyClassLoader extends ClassLoader {
 //		test(loader3);
 		
 		Class<?> clazz = loader1.loadClass("ygq.study.javase.classloader.Cat");
-		
-		Object obj = clazz.newInstance();	//创建一个Cat对象
+		//clazz.newInstance()
+		Object obj = clazz.getDeclaredConstructor().newInstance();	//创建一个Cat对象
 		System.out.println("clazz.hashCode():"+clazz.hashCode());
 		
 		loader1 = null;
@@ -121,7 +121,7 @@ public class MyClassLoader extends ClassLoader {
 		loader1.setPath("D:\\Temp\\myapp\\serverlib\\");
 		
 		clazz = loader1.loadClass("ygq.study.javase.classloader.Cat");
-		obj = clazz.newInstance();
+		obj = clazz.getDeclaredConstructor();
 		
 		System.out.println("clazz.hashCode():"+clazz.hashCode());
 		
@@ -135,7 +135,7 @@ public class MyClassLoader extends ClassLoader {
 		
 		Class<?> clazz = loader.loadClass("ygq.study.javase.classloader.Cat");
 		
-		Object obj = clazz.newInstance();
+		Object obj = clazz.getDeclaredConstructor().newInstance();
 		
 		System.out.println(obj);
 	}

@@ -407,7 +407,7 @@ needIO:
     /*
      * Do all the outstanding handshake tasks in the current Thread.
      */
-    private SSLEngineResult.HandshakeStatus doTasks() {
+    private HandshakeStatus doTasks() {
 
         Runnable runnable;
 

@@ -2,18 +2,16 @@ package ygq.study.javase.bases.util;
 
 import java.util.Base64;
 
-import javax.xml.bind.DatatypeConverter;
-
 /***
  * base64 JDK提供的工具类
  * @author yang
  */
 public class Base64Sample {
 	
-	public static String sample1(byte[] data){
-		String name = "拉萨快递费拉萨快递费拉萨快递费拉萨快递费啦缩短开发阿隆索看到发拉开松岛枫阿里看到算法啊了缩短开发啊了缩短开发阿里第三方库阿里第三方松岛枫理论卡的法律三分老的思考法律的看法了速度飞快松岛枫了缩短开发";
-		return DatatypeConverter.printBase64Binary(data==null?name.getBytes():data);//
-	}
+//	public static String sample1(byte[] data){
+//		String name = "拉萨快递费拉萨快递费拉萨快递费拉萨快递费啦缩短开发阿隆索看到发拉开松岛枫阿里看到算法啊了缩短开发啊了缩短开发阿里第三方库阿里第三方松岛枫理论卡的法律三分老的思考法律的看法了速度飞快松岛枫了缩短开发";
+//		return DatatypeConverter.printBase64Binary(data==null?name.getBytes():data);//
+//	}
 	public static String sample2(byte[] data){
 		String name = "拉萨快递费拉萨快递费拉萨快递费拉萨快递费啦缩短开发阿隆索看到发拉开松岛枫阿里看到算法啊了缩短开发啊了缩短开发阿里第三方库阿里第三方松岛枫理论卡的法律三分老的思考法律的看法了速度飞快松岛枫了缩短开发";
 		return Base64.getEncoder().encodeToString(data==null?name.getBytes():data);

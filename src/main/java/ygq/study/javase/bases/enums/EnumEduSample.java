@@ -19,7 +19,7 @@ public class EnumEduSample{
 		
 		System.out.println(EnumEdu.getData().size());
 		
-		for(Iterator<Map.Entry<Integer, String>> iter = EnumEdu.getData().entrySet().iterator(); iter.hasNext();){
+		for(Iterator<Entry<Integer, String>> iter = EnumEdu.getData().entrySet().iterator(); iter.hasNext();){
 
 			Entry<Integer, String> entry = iter.next();
 			

@@ -62,7 +62,7 @@ public class ChatServer implements Runnable {
     /**
      *
      * @param port to listen to
-     * @throws java.io.IOException when failing to start the server
+     * @throws IOException when failing to start the server
      */
     public ChatServer(int port) throws IOException {
         channelGroup = AsynchronousChannelGroup.withFixedThreadPool(Runtime.getRuntime().availableProcessors(),
@@ -74,7 +74,7 @@ public class ChatServer implements Runnable {
     /**
      *
      * @return The socket address that the server is bound to
-     * @throws java.io.IOException if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     public SocketAddress getSocketAddress() throws IOException {
         return listener.getLocalAddress();

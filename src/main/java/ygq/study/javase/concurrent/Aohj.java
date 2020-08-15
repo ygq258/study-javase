@@ -39,7 +39,7 @@ public class Aohj {
 
 	public static void arraysSort() {
 		long beginTime = System.currentTimeMillis();
-		java.util.Arrays.sort(A);
+		Arrays.sort(A);
 		long endTime = System.currentTimeMillis();
 		System.out.println("arrays sort file:" + (endTime - beginTime) + "ms");
 	}
