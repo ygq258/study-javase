@@ -1,29 +1,30 @@
 package ygq.study.javase.lambda.stream;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import ygq.study.javase.lambda.stream.bean.PersistentData;
 import ygq.study.javase.lambda.stream.bean.StudentBean;
 
-public class StreamSample2 implements Comparator<String>{
+/**
+ * 对应第三章示例代码
+ * @author ygq
+ */
+public class StreamSample2{
 
-	@Override
-	public int compare(String o1, String o2) {
-		return 0;
-	}
+	/**
+	 * 3.3常用的流操作
+	 */
 	public static void sample1() {
 		
 		List<StudentBean> studentList = PersistentData.getStudentList();
@@ -46,8 +47,13 @@ public class StreamSample2 implements Comparator<String>{
 		Integer reduce = Stream.of(1,2,3).reduce(10,(acc, element)-> acc+element);
 		System.out.println("reduce:"+reduce);
 		
+		BinaryOperator<Integer> accumulator = (acc, element) -> acc+element;
+		Integer apply = accumulator.apply(accumulator.apply(accumulator.apply(10, 1), 2), 3);
+		System.out.println("reduce(2):"+apply);
+		
 		Set<String> rigins = studentList.stream().filter(e->e.getAge() > 50).map(e->e.getName()).collect(Collectors.toSet());
 		System.out.println("rigins:"+rigins);
+		
 		
 	}
 	/**
@@ -89,14 +95,54 @@ public class StreamSample2 implements Comparator<String>{
 		
 		asList2.stream().reduce((c1,c2)->c1).get();
 	}
-	
+	/**
+	 * 3.10进阶练习
+	 */
 	public static void sample3() {
 		List<StudentBean> studentList = PersistentData.getStudentList();
-		studentList.stream().mapToInt(e->e.getAge().intValue());
+		List<String> collect = studentList.stream().map(e->e.getName()).collect(Collectors.toList());
+		System.out.println("1:"+Arrays.toString(collect.toArray()));
+		List<StudentBean> collect2 = studentList.stream().filter(e->e.getAge() > 40).collect(Collectors.toList());
+		System.out.println("2:"+Arrays.toString(collect2.toArray()));
+		int[] array = studentList.stream().mapToInt(e->e.getAge().intValue()).toArray();
+		System.out.println("ints:"+Arrays.toString(array));
+	}
+	
+	/**
+	 * 4.2示例
+	 * @param args
+	 */
+	public static void sample4() {
+		List<StudentBean> studentList = PersistentData.getStudentList();
+		IntSummaryStatistics summaryStatistics = studentList.stream().mapToInt(track->track.getAge()).summaryStatistics();		
+		System.out.printf("Max:%d, Min:%d, Ave:%f, Sum:%d", 
+				summaryStatistics.getMax(),
+				summaryStatistics.getMin(),
+				summaryStatistics.getAverage(),
+				summaryStatistics.getSum());
+	}
+	
+	/**
+	 * reduce理解
+	 */
+	public static void sample5() {
+		
+		List<Integer> asList = Arrays.asList(1,2,3,4,5);
+		Integer reduce = asList.stream().reduce(3,(x,y)->x+y);
+		System.out.println("reduce："+reduce);
+		Integer result = 3;
+		BinaryOperator<Integer> operator = (x, y)->x+y;
+		for (int i = 0; i < asList.size(); i++) {
+			result = operator.apply(result, asList.get(i));
+		}
+		System.out.println("模拟reduce："+result);
+		Integer reduce2 = asList.stream().reduce(0,(x,y)->x+y);
+		System.out.println("串行reduce："+reduce2);
+		Integer reduce3 = asList.parallelStream().reduce(0, (x,y)->x+y, (x,y)->x+y);
+		System.out.println("并行reduce："+reduce3);
 	}
 	
 	public static void main(String[] args) {
-		sample2();
-		
+		sample5();
 	}
 }
